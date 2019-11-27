@@ -1,10 +1,6 @@
 import React from 'react'
-import {graphql} from 'gatsby'
-import {
-  mapEdgesToNodes,
-  filterOutDocsWithoutSlugs,
-  filterOutDocsPublishedInTheFuture
-} from '../lib/helpers'
+import { graphql } from 'gatsby'
+import { mapEdgesToNodes, filterOutDocsWithoutSlugs, filterOutDocsPublishedInTheFuture } from '../lib/helpers'
 import BlogPostPreviewList from '../components/blog-post-preview-list'
 import Container from '../components/container'
 import GraphQLErrorList from '../components/graphql-error-list'
@@ -40,6 +36,23 @@ export const query = graphql`
       description
       keywords
     }
+    lessons: allSanityLesson {
+      edges {
+        node {
+          id
+          createdAt: _createdAt
+          title
+          header {
+            title
+            level
+            duration
+            knowledge
+            compatibility
+          }
+          _rawOverview
+        }
+      }
+    }
     posts: allSanityPost(
       limit: 6
       sort: { fields: [publishedAt], order: DESC }
@@ -65,7 +78,7 @@ export const query = graphql`
 `
 
 const IndexPage = props => {
-  const {data, errors} = props
+  const { data, errors } = props
 
   if (errors) {
     return (
@@ -76,34 +89,27 @@ const IndexPage = props => {
   }
 
   const site = (data || {}).site
-  const postNodes = (data || {}).posts
-    ? mapEdgesToNodes(data.posts)
-      .filter(filterOutDocsWithoutSlugs)
-      .filter(filterOutDocsPublishedInTheFuture)
-    : []
+  // const postNodes = (data || {}).posts
+  //   ? mapEdgesToNodes(data.posts)
+  //       .filter(filterOutDocsWithoutSlugs)
+  //       .filter(filterOutDocsPublishedInTheFuture)
+  //   : []
 
+  const lessonNodes = (data || {}).lessons ? mapEdgesToNodes(data.lessons) : []
+  console.log({ lessonNodes })
   if (!site) {
     throw new Error(
-      'Missing "Site settings". Open the studio at http://localhost:3333 and add some content to "Site settings" and restart the development server.'
+      'Missing "Site settings". Open the studio at http://localhost:3333 and add some content to "Site settings" and restart the development server.',
     )
   }
 
   return (
     <Layout>
-      <SEO
-        title={site.title}
-        description={site.description}
-        keywords={site.keywords}
-      />
+      <SEO title={site.title} description={site.description} keywords={site.keywords} />
       <Container>
         <h1 hidden>Welcome to {site.title}</h1>
-        {postNodes && (
-          <BlogPostPreviewList
-            title='Latest blog posts'
-            nodes={postNodes}
-            browseMoreHref='/archive/'
-          />
-        )}
+        {lessonNodes && <BlogPostPreviewList title="Latest lessons" nodes={lessonNodes} browseMoreHref="/archive/" />}
+        {/* {postNodes && <BlogPostPreviewList title="Latest blog posts" nodes={postNodes} browseMoreHref="/archive/" />} */}
       </Container>
     </Layout>
   )
