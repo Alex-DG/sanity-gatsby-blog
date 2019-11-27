@@ -6,7 +6,7 @@ export default {
     {
       name: 'title',
       type: 'string',
-      title: 'Main Title'
+      title: 'Main'
     },
     {
       name: 'header',
