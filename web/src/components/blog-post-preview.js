@@ -10,6 +10,8 @@ import { responsiveTitle3 } from './typography.module.css'
 
 //  <Link className={props.isInList ? styles.inList : styles.inGrid} to={getBlogUrl(props.publishedAt, props.slug.current)}>
 function BlogPostPreview(props) {
+  console.log('BlogPostPreview', props)
+  const { header } = props
   return (
     <Link className={props.isInList ? styles.inList : styles.inGrid} to={getLessonUrl(props.id)}>
       {/* <div className={styles.leadMediaThumb}>
@@ -25,7 +27,7 @@ function BlogPostPreview(props) {
         )}
       </div> */}
       <div className={styles.text}>
-        <h3 className={cn(responsiveTitle3, styles.title)}>{props.header.title}</h3>
+        <h3 className={cn(responsiveTitle3, styles.title)}>{header && (header.title || 'Not found')}</h3>
         {props._rawOverview && (
           <div className={styles.excerpt}>
             <PortableText blocks={props._rawOverview} />
