@@ -1,7 +1,7 @@
 export default {
   name: 'lessonOverview',
   type: 'array',
-  title: 'Lesson Overview',
+  title: 'Overview',
   of: [
     {
       title: 'Block',
