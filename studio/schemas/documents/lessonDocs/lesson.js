@@ -4,6 +4,11 @@ export default {
   title: 'Lesson',
   fields: [
     {
+      name: 'title',
+      type: 'string',
+      title: 'Main Title'
+    },
+    {
       name: 'header',
       type: 'lessonHeader',
       title: 'Header'

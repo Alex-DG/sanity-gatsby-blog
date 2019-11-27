@@ -11,6 +11,12 @@ import post from './documents/post'
 import siteSettings from './documents/siteSettings'
 
 import lesson from './documents/lessonDocs/lesson'
+import challenge from './documents/lessonDocs/challenge'
+import objective from './documents/lessonDocs/objective'
+import planActivity from './documents/lessonDocs/planActivity'
+import reading from './documents/lessonDocs/reading'
+import resourceEquipment from './documents/lessonDocs/resourceEquipment'
+import vocabulary from './documents/lessonDocs/vocabulary'
 
 // Object types
 import bodyPortableText from './objects/bodyPortableText'
@@ -42,7 +48,13 @@ export default createSchema({
     excerptPortableText,
     lesson,
     lessonHeader,
-    lessonOverview
+    lessonOverview,
+    challenge,
+    objective,
+    planActivity,
+    reading,
+    resourceEquipment,
+    vocabulary
     // When added to this list, object types can be used as
     // { type: 'typename' } in other document schemas
   ])

@@ -1,7 +1,7 @@
 export default {
   name: 'vocabulary',
   type: 'document',
-  title: 'Vocabulary',
+  title: 'Key Vocabulary',
   fields: [
     {
       name: 'title',
