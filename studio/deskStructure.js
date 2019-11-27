@@ -3,12 +3,16 @@ import MdSettings from 'react-icons/lib/md/settings'
 import MdPerson from 'react-icons/lib/md/person'
 
 const hiddenDocTypes = listItem =>
-  !['category', 'author', 'post', 'siteSettings'].includes(listItem.getId())
+  !['category', 'author', 'post', 'lesson', 'siteSettings'].includes(listItem.getId())
 
 export default () =>
   S.list()
     .title('Content')
     .items([
+      S.listItem()
+        .title('Lessons')
+        .schemaType('lesson')
+        .child(S.documentTypeList('lesson').title('Lessons')),
       S.listItem()
         .title('Settings')
         .icon(MdSettings)
