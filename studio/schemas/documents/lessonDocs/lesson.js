@@ -6,18 +6,18 @@ export default {
     {
       name: 'title',
       type: 'string',
-      title: 'Main'
+      title: 'Main',
     },
     {
       name: 'header',
       type: 'lessonHeader',
-      title: 'Header'
+      title: 'Header',
     },
     {
       name: 'overview',
       type: 'lessonOverview',
       title: 'Overview',
-      description: "Present the lesson's content"
+      description: "Present the lesson's content",
     },
     {
       name: 'objectives',
@@ -27,10 +27,10 @@ export default {
         {
           type: 'reference',
           to: {
-            type: 'objective'
-          }
-        }
-      ]
+            type: 'objective',
+          },
+        },
+      ],
     },
     {
       name: 'keyVocabulary',
@@ -40,10 +40,10 @@ export default {
         {
           type: 'reference',
           to: {
-            type: 'vocabulary'
-          }
-        }
-      ]
+            type: 'vocabulary',
+          },
+        },
+      ],
     },
     {
       name: 'resourcesEquipment',
@@ -53,10 +53,10 @@ export default {
         {
           type: 'reference',
           to: {
-            type: 'resourceEquipment'
-          }
-        }
-      ]
+            type: 'resourceEquipment',
+          },
+        },
+      ],
     },
     {
       name: 'readings',
@@ -66,10 +66,10 @@ export default {
         {
           type: 'reference',
           to: {
-            type: 'reading'
-          }
-        }
-      ]
+            type: 'reading',
+          },
+        },
+      ],
     },
     {
       name: 'planActivities',
@@ -79,10 +79,10 @@ export default {
         {
           type: 'reference',
           to: {
-            type: 'planActivity'
-          }
-        }
-      ]
+            type: 'planActivity',
+          },
+        },
+      ],
     },
     {
       name: 'challenges',
@@ -92,10 +92,24 @@ export default {
         {
           type: 'reference',
           to: {
-            type: 'challenge'
-          }
-        }
-      ]
-    }
-  ]
+            type: 'challenge',
+          },
+        },
+      ],
+    },
+    {
+      name: 'benchmarks',
+      type: 'array',
+      title: 'Curriculum Benchmarks',
+      description: 'Select the benchmark table(s) you you would like to attached to your lesson',
+      of: [
+        {
+          type: 'reference',
+          to: {
+            type: 'benchmarkTable',
+          },
+        },
+      ],
+    },
+  ],
 }

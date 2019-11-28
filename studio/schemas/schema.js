@@ -17,6 +17,7 @@ import planActivity from './documents/lessonDocs/planActivity'
 import reading from './documents/lessonDocs/reading'
 import resourceEquipment from './documents/lessonDocs/resourceEquipment'
 import vocabulary from './documents/lessonDocs/vocabulary'
+import benchmarkTable from './documents/lessonDocs/benchmarkTable'
 
 // Object types
 import bodyPortableText from './objects/bodyPortableText'
@@ -27,6 +28,9 @@ import authorReference from './objects/authorReference'
 
 import lessonHeader from './objects/lessonObjects/lessonHeader'
 import lessonOverview from './objects/lessonObjects/lessonOverview'
+import tableColumns from './objects/lessonObjects/tableColumns'
+import booleanCell from './objects/lessonObjects/booleanCell'
+import tableRow from './objects/lessonObjects/tableRow'
 
 // Then we give our schema to the builder and provide the result to Sanity
 export default createSchema({
@@ -54,8 +58,12 @@ export default createSchema({
     planActivity,
     reading,
     resourceEquipment,
-    vocabulary
+    vocabulary,
+    benchmarkTable,
+    tableColumns,
+    tableRow,
+    booleanCell,
     // When added to this list, object types can be used as
     // { type: 'typename' } in other document schemas
-  ])
+  ]),
 })

@@ -36,7 +36,6 @@ async function createBlogPostPages(graphql, actions, reporter) {
   //   }
   // `)
 
-  console.log('!!!!!!!! =>', result)
   if (result.errors) throw result.errors
 
   const postEdges = (result.data.allSanityLesson || {}).edges || []
