@@ -31,6 +31,9 @@ import lessonOverview from './objects/lessonObjects/lessonOverview'
 import tableColumns from './objects/lessonObjects/tableColumns'
 import booleanCell from './objects/lessonObjects/booleanCell'
 import tableRow from './objects/lessonObjects/tableRow'
+import customTable from './objects/customTable/customTable'
+import rows from './objects/customTable/rows'
+import row from './objects/customTable/row'
 
 // Then we give our schema to the builder and provide the result to Sanity
 export default createSchema({
@@ -63,6 +66,9 @@ export default createSchema({
     tableColumns,
     tableRow,
     booleanCell,
+    customTable,
+    rows,
+    row,
     // When added to this list, object types can be used as
     // { type: 'typename' } in other document schemas
   ]),

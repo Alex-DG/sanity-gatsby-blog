@@ -111,5 +111,10 @@ export default {
         },
       ],
     },
+    {
+      name: 'customTable',
+      title: 'Custom Table',
+      type: 'customTable',
+    },
   ],
 }
