@@ -6,7 +6,9 @@ require('dotenv').config({
 const clientConfig = require('./client-config')
 
 const isProd = process.env.NODE_ENV === 'production'
+
 console.log('SANITY_READ_TOKEN', process.env.SANITY_READ_TOKEN)
+
 module.exports = {
   plugins: [
     'gatsby-plugin-postcss',
@@ -15,7 +17,7 @@ module.exports = {
       resolve: 'gatsby-source-sanity',
       options: {
         ...clientConfig.sanity,
-        token: process.env.SANITY_READ_TOKEN,
+        token: process.env.SANITY_READ_TOKEN || process.env.SANITY_DEPLOY_STUDIO_TOKEN,
         watchMode: true,
         overlayDrafts: true,
       },
