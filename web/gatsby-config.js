@@ -7,7 +7,9 @@ const clientConfig = require('./client-config')
 
 const isProd = process.env.NODE_ENV === 'production'
 
-console.log('SANITY_READ_TOKEN', process.env.SANITY_READ_TOKEN)
+const token = process.env.SANITY_READ_TOKEN || process.env.REACT_SANITY_DEPLOY_STUDIO_TOKEN
+
+console.log('SANITY TOKEN = ', token)
 
 module.exports = {
   plugins: [
@@ -17,7 +19,7 @@ module.exports = {
       resolve: 'gatsby-source-sanity',
       options: {
         ...clientConfig.sanity,
-        token: process.env.SANITY_READ_TOKEN || process.env.SANITY_DEPLOY_STUDIO_TOKEN,
+        token,
         watchMode: true,
         overlayDrafts: true,
       },
