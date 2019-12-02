@@ -22,18 +22,34 @@ export default class TableInput extends React.Component {
     onChange: PropTypes.func.isRequired,
   }
 
-  updateCell = (e, rowIndex, cellIndex) => {
+  addNestedCell = (e, rowIndex, nestedCellIndex) => {
     const { value, onChange } = this.props
     // Clone the current table data
     const newValue = { ...value }
-    newValue.rows[rowIndex].cells[cellIndex] = e.target.value
+    newValue.rows[rowIndex].nestedCells[nestedCellIndex].push('')
+    return onChange(createPatchFrom(newValue))
+  }
+
+  removeNestedCell = (e, rowIndex, nestedCellIndex) => {
+    const { value, onChange } = this.props
+    // Clone the current table data
+    const newValue = { ...value }
+    newValue.rows[rowIndex].nestedCells[nestedCellIndex].pop()
+    return onChange(createPatchFrom(newValue))
+  }
+
+  updateCell = (e, rowIndex, cellIndex, index) => {
+    const { value, onChange } = this.props
+    // Clone the current table data
+    const newValue = { ...value }
+    newValue.rows[rowIndex].nestedCells[cellIndex][index] = e.target.value
     return onChange(createPatchFrom(newValue))
   }
 
   initializeTable = () => {
     const { onChange } = this.props
     // Add a single row with a single empty cell (1 row, 1 column)
-    const newValue = { rows: [{ _type: 'row', _key: uuid(), cells: [''] }] }
+    const newValue = { rows: [{ _type: 'row', _key: uuid(), nestedCells: [['']] }] }
     return onChange(createPatchFrom(newValue))
   }
 
@@ -44,13 +60,14 @@ export default class TableInput extends React.Component {
     // Clone the current table data
     const newValue = { ...value }
     // Calculate the column count from the first row
-    const columnCount = value.rows[0].cells.length
+    const columnCount = value.rows[0].nestedCells.length
     // Add as many cells as we have columns
     newValue.rows.push({
       _type: 'row',
       _key: uuid(),
-      cells: Array(columnCount).fill(''),
+      nestedCells: Array(columnCount).fill(['']),
     })
+    //  cells: Array(columnCount).fill(''),
     return onChange(createPatchFrom(newValue))
   }
 
@@ -75,7 +92,7 @@ export default class TableInput extends React.Component {
     const newValue = { ...value }
     // Add a cell to each of the rows
     newValue.rows.forEach((row, i) => {
-      newValue.rows[i].cells.push('')
+      newValue.rows[i].nestedCells.push([''])
     })
     return onChange(createPatchFrom(newValue))
   }
@@ -86,10 +103,10 @@ export default class TableInput extends React.Component {
     const newValue = { ...value }
     // For each of the rows, remove the cell by index
     newValue.rows.forEach(row => {
-      row.cells.splice(index, 1)
+      row.nestedCells.splice(index, 1)
     })
     // If the last cell was removed, clear the table
-    if (!newValue.rows[0].cells.length) {
+    if (!newValue.rows[0].nestedCells.length) {
       this.clear()
     }
     return onChange(createPatchFrom(newValue))
@@ -109,6 +126,8 @@ export default class TableInput extends React.Component {
       value && value.rows && value.rows.length ? (
         <Table
           rows={value.rows}
+          addNestedCell={this.addNestedCell}
+          removeNestedCell={this.removeNestedCell}
           updateCell={this.updateCell}
           removeColumn={this.removeColumn}
           removeRow={this.removeRow}

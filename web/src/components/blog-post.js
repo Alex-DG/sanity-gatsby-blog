@@ -9,7 +9,6 @@ import AuthorList from './author-list'
 import styles from './blog-post.module.css'
 
 function BlogPost(props) {
-  console.log({ props })
   const {
     _rawOverview,
     authors,
@@ -22,6 +21,7 @@ function BlogPost(props) {
     planActivities,
     challenges,
   } = props
+
   return (
     <article className={styles.root}>
       {/* {mainImage && mainImage.asset && (
@@ -92,7 +92,7 @@ function BlogPost(props) {
                 </ul>
               </div>
             )}
-            {console.log('readings', readings)}
+
             {readings && (
               <div className={styles.categories}>
                 <h3 className={styles.categoriesHeadline}>Additional Reading</h3>

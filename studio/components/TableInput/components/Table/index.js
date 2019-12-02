@@ -2,7 +2,8 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styles from './table.css'
 
-const Table = ({ rows, updateCell, removeColumn, removeRow }) => {
+const Table = ({ rows, updateCell, addNestedCell, removeNestedCell, removeColumn, removeRow }) => {
+  console.log('TABLE YAY!!', { rows })
   if (!rows || !rows.length) return null
 
   // Button to remove row
@@ -19,19 +20,37 @@ const Table = ({ rows, updateCell, removeColumn, removeRow }) => {
     </td>
   )
 
-  const renderColumnRemovers = row => <tr>{row.cells.map((c, i) => renderColumnRemover(i))}</tr>
+  const renderColumnRemovers = row => <tr>{row.nestedCells.map((c, i) => renderColumnRemover(i))}</tr>
 
-  const renderRowCell = rowIndex => (cell, cellIndex) => (
+  const renderRowCell = rowIndex => (nestedCells = [], cellIndex) => (
     <td key={`cell-${cellIndex}`} className={styles.cell}>
-      <input className={styles.input} type="text" value={cell} onChange={e => updateCell(e, rowIndex, cellIndex)} />
+      {nestedCells &&
+        nestedCells.map((cell, index) => (
+          <>
+            <input
+              key={index + 999}
+              className={styles.input}
+              type="text"
+              value={cell}
+              onChange={e => updateCell(e, rowIndex, cellIndex, index)}
+            />
+          </>
+        ))}
+      <div>
+        <button onClick={e => addNestedCell(e, rowIndex, cellIndex)}>+</button>
+        {nestedCells.length > 1 && <button onClick={e => removeNestedCell(e, rowIndex, cellIndex)}>-</button>}
+      </div>
+
+      {/* <input className={styles.input} type="text" value={cell} onChange={e => updateCell(e, rowIndex, cellIndex)} />
+      <input className={styles.input} type="text" value={cell} onChange={e => updateCell(e, rowIndex, cellIndex)} /> */}
     </td>
   )
 
   const renderRow = (row, rowIndex) => {
-    const renderCell = renderRowCell(rowIndex)
+    const renderNestedCell = renderRowCell(rowIndex)
     return (
       <tr key={`row-${rowIndex}`}>
-        {row.cells.map(renderCell)}
+        {row.nestedCells.map(renderNestedCell)}
         {renderRowRemover(rowIndex)}
       </tr>
     )
@@ -50,6 +69,8 @@ const Table = ({ rows, updateCell, removeColumn, removeRow }) => {
 Table.propTypes = {
   rows: PropTypes.array,
   updateCell: PropTypes.func,
+  removeNestedCell: PropTypes.func,
+  addNestedCell: PropTypes.func,
   removeColumn: PropTypes.func,
   removeRow: PropTypes.func,
 }

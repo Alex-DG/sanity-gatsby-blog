@@ -15,6 +15,11 @@ async function createBlogPostPages(graphql, actions, reporter) {
         edges {
           node {
             id
+            customTable {
+              rows {
+                cells
+              }
+            }
           }
         }
       }
@@ -43,6 +48,7 @@ async function createBlogPostPages(graphql, actions, reporter) {
   postEdges
     .filter(edge => !isFuture(edge.node.createdAt))
     .forEach((edge, index) => {
+      console.log({ lesson: edge.node })
       const { id } = edge.node
       const path = `/lesson/${id}/`
 

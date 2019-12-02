@@ -49,6 +49,11 @@ export const query = graphql`
       title
       id
       createdAt: _createdAt
+      customTable {
+        rows {
+          cells
+        }
+      }
       title
       header {
         title

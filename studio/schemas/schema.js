@@ -34,6 +34,7 @@ import tableRow from './objects/lessonObjects/tableRow'
 import customTable from './objects/customTable/customTable'
 import rows from './objects/customTable/rows'
 import row from './objects/customTable/row'
+import nestedCells from './objects/customTable/nestedCells'
 
 // Then we give our schema to the builder and provide the result to Sanity
 export default createSchema({
@@ -69,6 +70,7 @@ export default createSchema({
     customTable,
     rows,
     row,
+    nestedCells,
     // When added to this list, object types can be used as
     // { type: 'typename' } in other document schemas
   ]),
